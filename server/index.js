@@ -1,0 +1,93 @@
+import express, { json } from "express";
+import { join, extname } from "path";
+import { promises as fs } from "fs";
+import { spawn } from "child_process";
+import cors from "cors";
+
+const app = express();
+app.use(json());
+
+// 🔓 Configuración de CORS: permitir solo el cliente
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
+
+const PORT = 5000;
+
+// 📂 Carpetas base donde se encuentran los directorios locales.
+const BASE_FOLDERS = {
+  peliculas: [
+    "F:\\DESCARGAS COMPLETAS\\_010__PELICULAS__\\",
+    "E:\\DESCARGAS 2\\--PELICULAS II",
+    "E:\\DESCARGAS 2\\DETorrent",
+  ],
+  series: [
+    "F:\\DESCARGAS COMPLETAS\\_020__SERIES__\\",
+    "E:\\DESCARGAS 2\\--SERIES II",
+  ],
+};
+
+// 📌 Endpoint: obtener categorías y rutas base
+app.get("/api/bases", (req, res) => {
+  res.json(BASE_FOLDERS);
+});
+
+// 📌 Endpoint: listar carpetas y películas en una ruta
+app.get("/api/videos", async (req, res) => {
+  const { base, index, path: currentPath } = req.query;
+
+  if (!BASE_FOLDERS[base] || !BASE_FOLDERS[base][index]) {
+    return res.status(400).json({ error: "Base o índice no válido" });
+  }
+
+  const basePath = BASE_FOLDERS[base][index];
+  const fullPath = join(basePath, decodeURIComponent(currentPath || ""));
+
+  try {
+    const items = await fs.readdir(fullPath, { withFileTypes: true });
+
+    const folders = [];
+    const videos = [];
+
+    for (const item of items) {
+      if (item.isDirectory()) {
+        folders.push({ name: item.name, type: "folder" });
+      } else if (
+        item.isFile() &&
+        [".mp4", ".mkv", ".avi"].includes(extname(item.name).toLowerCase())
+      ) {
+        // videos.push({ name: item.name, type: "movie" });
+        videos.push({ name: item.name, type: "video" });
+      }
+    }
+
+    res.json({ folders, videos });
+  } catch (err) {
+    console.error("❌ Error al leer el directorio:", err);
+    res.status(500).json({ error: "Error al cargar la carpeta." });
+  }
+});
+
+// 📌 Endpoint: reproducir en VLC
+app.get("/api/play", (req, res) => {
+  const { base, index, path: filePath } = req.query;
+
+  if (!BASE_FOLDERS[base] || !BASE_FOLDERS[base][index]) {
+    return res.status(400).json({ error: "Base o índice no válido" });
+  }
+
+  const basePath = BASE_FOLDERS[base][index];
+  const fullPath = join(basePath, decodeURIComponent(filePath));
+
+  // ⚡ Abrir VLC (asegurate de que esté en el PATH del sistema)
+  spawn("vlc", [fullPath], { detached: true, stdio: "ignore" }).unref();
+
+  res.json({ success: true, file: fullPath });
+});
+
+// 🚀 Iniciar servidor
+app.listen(PORT, () => {
+  console.log(`✅ Servidor corriendo en http://localhost:${PORT}`);
+});

@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(240, 112, 7, 0.87);
+  background-color: #204353;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  text-decoration: none;
+  list-style: none;
+
+  /** COLORES ********************************* */
+  --fondo-primario: #311c58;
+  --fondo-primarioTR: #311c5896;
+  --fondo-secundario: #1d6f72;
+  --fondo-secundarioTR: #1d6f7296;
+
+  /* colores de texto */
+  --color-texto-primario: #f0f0f0;
+  --color-texto-primarioTR: #f0f0f096;
+  --color-texto-secundario: #e084f7;
+  --color-texto-secundarioTR: #e084f796;
+  --color-texto-terciario: #f7be99;
+  --color-texto-terciarioTR: #f7be9996;
+
+  --color-primario: #25a888;
+  --color-primarioTR: #25a88896;
+  --color-secundario: #f7be99;
+  --color-secundarioTR: #f7be9996;
+  --color-texto-secundario: #f0f0f0;
+
+/* colores de botones ****** */
+  --color-btn-primario: #646cff;
+  --color-btn-primarioTR: #646cff96;
+  --color-btn-secundario: #1d6f72;
+  --color-btn-secundarioTR: #1d6f7296;
+
+  
+  
+}
+
+a {
+  font-weight: 500;
+  color: var(--color-primario);
+  text-decoration: inherit;
+}
+a:hover {
+  color: var(--color-texto-secundario);
+}
+
+body {
+  /* margin: 0;
+  display: flex;
+  place-items: center; */
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 2.4em;
+  line-height: 1.1;
+}
+
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--color-btn-primario);
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: var(--color-primario);
+  background-color: var(--color-btn-secundario);
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.fondo-color {
+  background-color: var(--fondo-primario);
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+li {
+  list-style: none;
+
+}
+li:hover{
+  background-color: var(--color-btn-secundarioTR);
+  border-radius: 20px;
+}

@@ -1,0 +1,106 @@
+/* se palica a lo que sea */
+/* pero lo uso en la card y el boton */
+.custom-hover {
+    transition: all 0.3s ease-out;
+}
+.custom-hover:hover {
+    transform: scale(1);
+    box-shadow: 0.15rem 0.15rem 0.8rem rgba(0, 0, 0, 0.8), -0.1rem -0.1rem 0.5rem rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in;
+}
+/* card */
+.custom-card {
+    transition: all 0.3s ease-out;
+}
+.custom-card:hover{
+    border-color: rgb(56, 68, 245);
+    box-shadow: 2px 3px 8px rgba(1, 23, 143, 0.99);
+    transition: all 0.3s ease-in;
+}
+/* para la img */
+.card-img{
+    border-top-left-radius: 5px; 
+    border-top-right-radius: 5px; 
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    /* min-width: 230px; */
+    /* max-width: 320px;*/
+    /* height: 200px;*/
+    transition: all 1.3s ease-in;
+}
+.card-img:hover{
+    /* transform: rotateY(360deg); */
+    /* transform: rotateX(45deg); */
+    transition: all 0.3s ease-in;
+}
+/* card- body */
+/* .card-body{
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    /* margin: 1rem 0; */
+} */
+/* titulo - nombre */
+.card-title{
+    /* font-size: large; */
+    width: 90%;
+    margin: 0 auto;
+    padding: 0.3rem 0;
+}
+.card-titulo-titulo{
+    text-wrap: auto;
+    width: 6rem;
+}
+/* texto */
+.card-text{
+    /* max-width: 11rem; */
+    /* margin: 0.2rem auto; */
+    /* font-weight: 200; */
+    /* background-color: cadetblue; */
+    text-align: center;
+    padding: 0.3rem;
+}
+
+.card-titulo-genero {
+    font-weight: 600;
+    color: rgb(56, 68, 245);
+    /* background-color: rgb(56, 68, 245); */
+    /* padding: 0.2rem; */
+    /* border-radius: 5px; */
+}
+.card-titulo-year {
+    font-weight: 600;
+    color: rgb(117, 92, 8);
+    /* background-color: rgb(56, 68, 245); */
+    /* padding: 0.2rem; */
+    /* border-radius: 5px; */
+}
+
+
+/* boton card */
+.btn-card {
+    padding: 0.2rem 1rem;
+    /* margin: 1rem auto 0.5rem; */
+    transition: all 0.15s ease-out;
+}
+.btn-card:hover {
+    /* padding: 0.2rem 1rem; */
+    /* transform: scale(1.1); */
+    border-color: rgb(56, 68, 245);
+    transition: all 0.15s ease-in;
+}
+.btn-card:active {
+    background-color:rgba(1, 23, 143, 0.69) ;
+    /* padding: 0.2rem 1.7rem; */
+    /* transform: scale(0.8); */
+    /* margin: 1rem auto 0.5rem ; */
+    transform: scale(1.1);
+    transition: all 0.3s ease-in-out;
+    /* transition: all 0.1s; */
+}
+
+
+/* Para el componente titulos */
+.row-card{
+    row-gap: 0.5rem;
+}
+
+
