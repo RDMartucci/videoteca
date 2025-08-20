@@ -28,3 +28,40 @@ export function procesarNombrePelicula(textoSucio) {
     nombreLimpio = nombreLimpio.replace(/\s{2,}/g, " ").trim();
     return { nombre: nombreLimpio, ano };
 }
+
+export function procesarNombrePeliculaV2(nombre) {
+    if (typeof nombre !== "string") return { nombre: "", ano: null };
+
+    // Quitar extensión
+    const regexExt = /\.(mkv|mp4|avi|mov|wmv|flv|mpeg|mpg)$/i;
+    let sinExtension = nombre.replace(regexExt, "");
+
+    // Quitar basura inicial como [RARBG], (2020), {cualquierCosa}
+    sinExtension = sinExtension.replace(/^(\[.*?\]|\(.*?\)|\{.*?\})+/, "");
+
+    // Quitar números, guiones u otros caracteres delante del título
+    sinExtension = sinExtension.replace(/^[\d\W_]+/, "");
+
+    // Detectar año
+    const regexAno = /\b(19|20)\d{2}\b/;
+    const matchAno = sinExtension.match(regexAno);
+    const ano = matchAno ? parseInt(matchAno[0], 10) : null;
+
+    if (ano) {
+        // Quitar el año del nombre si existe
+        sinExtension = sinExtension.split(matchAno[0])[0];
+    }
+
+    // Quitar tags comunes
+    const regexTags =
+        /\b(1080p|720p|2160p|4k|bluray|brrip|hdrip|hdtv|webrip|dvdrip|x264|x265|h264|hevc|extended|remastered|uncut|proper)\b/gi;
+    sinExtension = sinExtension.replace(regexTags, "");
+
+    // Reemplazar separadores por espacios
+    let nombreLimpio = sinExtension.replace(/[._-]+/g, " ");
+
+    // Quitar espacios extra
+    nombreLimpio = nombreLimpio.replace(/\s{2,}/g, " ").trim();
+
+    return { nombre: nombreLimpio, ano };
+}

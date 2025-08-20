@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { getMovieDetails, searchMovie } from "../api/tmdb";
 import CarpetasList from "./ListaCarpetas";
 import MovieInfoModal from "./MovieInfoModal";
-import { procesarNombrePelicula } from "./utils";
+import { procesarNombrePeliculaV2 } from "./utils";
 import ListaTitulos from "./ListaTitulos";
 
 export default function TitulosContainer() {
@@ -93,7 +93,7 @@ export default function TitulosContainer() {
             if (typeof movieOrFileName === "object" && movieOrFileName.id) {
                 movie = movieOrFileName;
             } else {
-                const { tituloLimpio, ano } = cleanTitle(movieOrFileName);
+                const { tituloLimpio, ano } = procesarNombrePeliculaV2(movieOrFileName);
                 const list = await searchMovie(tituloLimpio, ano);
                 if (!list.length) return;
                 movie = list[0];
@@ -106,10 +106,10 @@ export default function TitulosContainer() {
     }
 
     return (
-        <div style={{ padding: "1rem" }}>
+        <div className="d-flex flex-column p-3">
             {/* Selector de categoría y ruta */}
-            <div style={{ marginBottom: "1rem" }}>
-                <label>
+            <div className="selector-bases d-grid gap-3 mb-3 pb-3" style={{ gridTemplateColumns: "1fr 5fr" }}>
+                <label >
                     Categoría:
                     <select
                         value={base}
@@ -118,7 +118,7 @@ export default function TitulosContainer() {
                             setIndex(0);
                             setCurrentPath("");
                         }}
-                        style={{ marginLeft: "0.5rem" }}
+                        className="form-select p-1 rounded-2"
                     >
                         {Object.keys(bases).map((b) => (
                             <option key={b} value={b}>
@@ -129,7 +129,7 @@ export default function TitulosContainer() {
                 </label>
 
                 {base && (
-                    <label style={{ marginLeft: "1rem" }}>
+                    <label className="me-2 ">
                         Ruta:
                         <select
                             value={index}
@@ -137,7 +137,7 @@ export default function TitulosContainer() {
                                 setIndex(Number(e.target.value));
                                 setCurrentPath("");
                             }}
-                            style={{ marginLeft: "0.5rem" }}
+                            className="form-select p-1 rounded-2"
                         >
                             {bases[base].map((ruta, i) => (
                                 <option key={i} value={i}>
@@ -149,7 +149,7 @@ export default function TitulosContainer() {
                 )}
             </div>
 
-            <div style={{ display: "flex", gap: "2rem" }}>
+            <div className="d-grid gap-3 mb-3 pb-3" style={{ gridTemplateColumns: "1fr 5fr" }}>
                 <CarpetasList
                     folders={folders}
                     currentPath={currentPath}

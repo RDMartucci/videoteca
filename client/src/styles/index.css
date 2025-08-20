@@ -32,8 +32,8 @@
   --color-texto-primarioTR: #f0f0f096;
   --color-texto-secundario: #e084f7;
   --color-texto-secundarioTR: #e084f796;
-  --color-texto-terciario: #f7be99;
-  --color-texto-terciarioTR: #f7be9996;
+  --color-texto-terciario: #793f19;
+  --color-texto-terciario: #793f1996;
 
   --color-primario: #25a888;
   --color-primarioTR: #25a88896;
@@ -114,4 +114,16 @@ li {
 li:hover{
   background-color: var(--color-btn-secundarioTR);
   border-radius: 20px;
+}
+
+/* Selectores select ****/
+.selector-bases{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  background-color: var(--fondo-secundarioTR);
+  border-radius: 10px;
+  margin-bottom: 5px;
 }

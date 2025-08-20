@@ -462,22 +462,107 @@
 
 /******************************************************** */
 /******************************************************** */
+// import React, { useEffect, useState } from "react";
+// import { searchMovie } from "../api/tmdb";
+// import "../styles/Card.css";
+
+
+// export default function MovieCard({ titulo, ano, fileName, onPlay, onInfo }) {
+//     const [results, setResults] = useState([]);
+//     const [selected, setSelected] = useState(null);
+
+
+//     useEffect(() => {
+//         let ignore = false;
+//         async function run() {
+//             const list = await searchMovie(titulo, ano);
+//             if (ignore) return;
+//             setResults(list);
+//             setSelected(list[0] || null);
+//         }
+//         run();
+//         return () => {
+//             ignore = true;
+//         };
+//     }, [titulo, ano]);
+
+
+//     const poster = selected?.poster_path
+//         ? `https://image.tmdb.org/t/p/w300${selected.poster_path}`
+//         : null;
+
+
+//     return (
+//         // <div style={{ border: "1px solid #ddd", borderRadius: 12, padding: 12, background: "#fff", display: "flex", flexDirection: "column" }}>
+//         <div className="custom-card custom-hover">
+//             {poster ? (
+//                 <img src={poster} alt={selected?.title || titulo} className="card-img" style={{ borderRadius: 8, width: "100%", aspectRatio: "2/3", objectFit: "cover" }}/>
+//             ) : (
+//                 <div style={{ background: "#eee", borderRadius: 8, width: "100%", aspectRatio: "2/3", display: "flex", alignItems: "center", justifyContent: "center", color: "#777" }}>
+//                     Sin poster
+//                 </div>
+//             )}
+
+
+//             <div style={{ marginTop: 8 }}>
+//                 <strong style={{ display: "block" }} className="card-title text-capitalize "> {selected?.title || titulo}</strong>
+//                 <small style={{ color: "#666" }}>{ano || selected?.release_date?.slice(0, 4) || "N/A"}</small>
+//             </div>
+
+
+//             {results.length > 1 && (
+//                 <select
+//                     aria-label="Elegir película"
+//                     value={selected?.id || ""}
+//                     onChange={(e) => setSelected(results.find((x) => x.id === Number(e.target.value)) || null)}
+//                     style={{ marginTop: 8, padding: 6, borderRadius: 8, border: "1px solid #ccc", width: "-webkit-fill-available"}}
+//                     className="form-select "
+//                 >
+//                     {results.map((r) => (
+//                         <option key={r.id} value={r.id}>
+//                             {r.title} ({r.release_date?.slice(0, 4) || "N/A"})
+//                         </option>
+//                     ))}
+//                 </select>
+//             )}
+
+
+//             <div style={{ marginTop: "auto", display: "flex", gap: 8 }}>
+//                 <button type="button" onClick={onPlay} style={{ flex: 1, padding: 8, background: "#16a34a", color: "#fff", border: 0, borderRadius: 8, cursor: "pointer" }}>
+//                     ▶ Reproducir
+//                 </button>
+//                 <button
+//                     type="button"
+//                     onClick={() => onInfo(selected)}
+//                     style={{ flex: 1, padding: 8, background: "#2563eb", color: "#fff", border: 0, borderRadius: 8, cursor: "pointer" }}
+//                 >
+//                     ℹ Info
+//                 </button>
+//             </div>
+//         </div>
+// )
+// }
+
+
+/**************************************************************************************** */
+/**************************************************************************************** */
 import React, { useEffect, useState } from "react";
 import { searchMovie } from "../api/tmdb";
-
+import "../styles/MovieCard.css";
 
 export default function MovieCard({ titulo, ano, fileName, onPlay, onInfo }) {
     const [results, setResults] = useState([]);
     const [selected, setSelected] = useState(null);
 
-
     useEffect(() => {
         let ignore = false;
         async function run() {
-            const list = await searchMovie(titulo, ano);
+            const nombreVideo = await searchMovie(titulo, ano);
             if (ignore) return;
-            setResults(list);
-            setSelected(list[0] || null);
+            if (nombreVideo) {
+                setResults([nombreVideo]);
+                setSelected(nombreVideo[0] || null);
+            }
         }
         run();
         return () => {
@@ -485,57 +570,67 @@ export default function MovieCard({ titulo, ano, fileName, onPlay, onInfo }) {
         };
     }, [titulo, ano]);
 
-
     const poster = selected?.poster_path
         ? `https://image.tmdb.org/t/p/w300${selected.poster_path}`
         : null;
 
-
     return (
-        <div style={{ border: "1px solid #ddd", borderRadius: 12, padding: 12, background: "#fff", display: "flex", flexDirection: "column" }}>
-            {poster ? (
-                <img src={poster} alt={selected?.title || titulo} style={{ borderRadius: 8, width: "100%", aspectRatio: "2/3", objectFit: "cover" }} />
-            ) : (
-                <div style={{ background: "#eee", borderRadius: 8, width: "100%", aspectRatio: "2/3", display: "flex", alignItems: "center", justifyContent: "center", color: "#777" }}>
-                    Sin poster
+        <div className="custom-card">
+            <div className="poster-container">
+                {poster ? (
+                    <img
+                        src={poster}
+                        alt={selected?.title || titulo}
+                        className="poster-img"
+                    />
+                ) : (
+                    <div className="poster-placeholder">Sin poster</div>
+                )}
+
+                {/* Overlay con botones */}
+                <div className="overlay">
+                    <button
+                        type="button"
+                        onClick={onPlay}
+                        className="btn btn-play"
+                        onMouseOver={ style => style.backgroundColor = "#16a34a" }
+                    >
+                        ▶ Reproducir
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => onInfo(selected)}
+                        className="btn btn-outline-info"
+                    >
+                        ℹ Info
+                    </button>
                 </div>
-            )}
 
-
-            <div style={{ marginTop: 8 }}>
-                <strong style={{ display: "block" }}>{selected?.title || titulo}</strong>
-                <small style={{ color: "#666" }}>{ano || selected?.release_date?.slice(0, 4) || "N/A"}</small>
+                {results.length > 1 && (
+                    <select
+                        aria-label="Elegir película"
+                        value={selected?.id || ""}
+                        onChange={(e) => setSelected(results.find((x) => x.id === Number(e.target.value)) || null)}
+                        style={{ marginTop: 8, padding: 6, borderRadius: 8, border: "1px solid #ccc", width: "-webkit-fill-available" }}
+                        className="form-select "
+                    >
+                        {results.map((r) => (
+                            <option key={r.id} value={r.id}>
+                                {r.title} ({r.release_date?.slice(0, 4) || "N/A"})
+                            </option>
+                        ))}
+                    </select>
+                )}
             </div>
 
-
-            {results.length > 1 && (
-                <select
-                    aria-label="Elegir película"
-                    value={selected?.id || ""}
-                    onChange={(e) => setSelected(results.find((x) => x.id === Number(e.target.value)) || null)}
-                    style={{ marginTop: 8, padding: 6, borderRadius: 8, border: "1px solid #ccc" }}
-                >
-                    {results.map((r) => (
-                        <option key={r.id} value={r.id}>
-                            {r.title} ({r.release_date?.slice(0, 4) || "N/A"})
-                        </option>
-                    ))}
-                </select>
-            )}
-
-
-            <div style={{ marginTop: "auto", display: "flex", gap: 8 }}>
-                <button type="button" onClick={onPlay} style={{ flex: 1, padding: 8, background: "#16a34a", color: "#fff", border: 0, borderRadius: 8, cursor: "pointer" }}>
-                    ▶ Reproducir
-                </button>
-                <button
-                    type="button"
-                    onClick={() => onInfo(selected)}
-                    style={{ flex: 1, padding: 8, background: "#2563eb", color: "#fff", border: 0, borderRadius: 8, cursor: "pointer" }}
-                >
-                    ℹ Info
-                </button>
+            <div className="card-details text-capitalize">
+                <strong className="card-title text-primary">
+                    {selected?.title || titulo}
+                </strong>
+                <small className="card-year text-info">
+                    {ano || selected?.release_date?.slice(0, 4) || "N/A"}
+                </small>
             </div>
         </div>
-)
+    );
 }
