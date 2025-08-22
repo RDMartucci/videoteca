@@ -3,7 +3,7 @@ import { useState } from 'react';
 // import Home from './layouts/Home.jsx';
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
-import TitulosContainer from './components/TitulosContainer.jsx';
+import MarcoGeneral from './components/MarcoGeneral.jsx';
 // import Display from './components/Display.jsx';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
         <section className="sec-home min-vh-100 fondo-color text-light">
           {/* <Display /> */}
           {/* <Home /> */}
-          <TitulosContainer />
+          <MarcoGeneral />
         </section>
       </main>
 

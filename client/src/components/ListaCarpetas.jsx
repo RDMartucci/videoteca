@@ -68,10 +68,11 @@ export default function ListaCarpetas({ folders, currentPath, openFolder, goBack
         <div style={{ flex: 1 }}>
             <h3>📁 Carpetas</h3>
             <div style={{ marginBottom: "1rem" }}>
+                <span style={{ marginLeft: "1rem" }}>Ruta actual: {currentPath || "/"}</span>
                 <button onClick={goBack} disabled={!currentPath} className="btn btn-outline-secondary w-100 rounded-pill">
                     ⬅️ Volver
                 </button>
-                <span style={{ marginLeft: "1rem" }}>Ruta actual: {currentPath || "/"}</span>
+                
             </div>
             {folders.length > 0 ? (
                 <ul>

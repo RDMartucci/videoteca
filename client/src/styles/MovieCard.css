@@ -1,10 +1,10 @@
 .custom-card {
   border-radius: 12px;
   overflow: hidden;
-  background: #fff;
+  background: var(--color-fondo-secundario);
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px var(--fondo-primario);
   position: relative;
   transition: transform 0.2s ease;
 }
@@ -40,7 +40,8 @@
 
 /* Oscurecer imagen al hover */
 .custom-card:hover .poster-img {
-  filter: brightness(70%);
+  filter: brightness(65%);
+  transition: opacity 0.3s ease-in;
 }
 
 /* Overlay con botones oculto por defecto */
@@ -62,6 +63,7 @@
 /* Aparece al hover */
 .custom-card:hover .overlay {
   opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
 /* Botones */
@@ -76,7 +78,8 @@
 }
 
 .btn-play {
-  background: #16a34a;
+  background: none;
+  border: 2px solid var(--color-btn-secundario);
 }
 
 .btn-info {
