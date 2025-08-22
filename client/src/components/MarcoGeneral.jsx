@@ -379,18 +379,23 @@ export default function MarcoGeneral() {
         setCurrentPath(parts.join("/"));
     };
 
-    async function openMovieInVLC(fileName) {
-        try {
-            const rel = currentPath ? `${currentPath}/${fileName}` : fileName;
-            const url = `${API_PLAY}?base=${base}&index=${index}&path=${encodeURIComponent(rel)}`;
-            const res = await fetch(url);
-            if (!res.ok) throw new Error("No se pudo abrir VLC");
-            console.log("VLC abierto:", rel);
-        } catch (e) {
-            console.error("/api/play ->", e);
-            alert("No se pudo reproducir en VLC");
-        }
+async function openMovieInVLC(fileName) {
+    try {
+        // Construir la ruta relativa
+        const rel = currentPath ? `${currentPath}/${fileName}` : fileName;
+
+        // Endpoint para reproducir
+        const res = await fetch(
+            `http://localhost:5000/api/play?base=${base}&index=${index}&path=${encodeURIComponent(rel)}`
+        );
+
+        if (!res.ok) throw new Error("No se pudo abrir VLC");
+        console.log("VLC abierto:", rel);
+    } catch (e) {
+        console.error("/api/play ->", e);
+        alert("No se pudo reproducir en VLC");
     }
+}
 
     async function showMovieInfo(movieOrFileName) {
         try {

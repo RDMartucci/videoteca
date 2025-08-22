@@ -43,7 +43,7 @@ export default function MovieCard({ titulo, ano, fileName, onPlay, onInfo }) {
                 <div className="overlay">
                     <button
                         type="button"
-                        onClick={onPlay}
+                        onClick={() => onPlay(fileName)}
                         className="btn-play"
                     >
                         ▶ Reproducir

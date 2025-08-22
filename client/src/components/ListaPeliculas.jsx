@@ -59,7 +59,8 @@ export default function ListaPeliculas({ videos, openMovieInVLC, showMovieInfo, 
                             titulo={tituloLimpio}
                             ano={ano}
                             fileName={m.name}
-                            onPlay={() => openMovieInVLC(m.name)}
+                            // onPlay={() => openMovieInVLC(m.name)}
+                            onPlay={openMovieInVLC}
                             onInfo={(movieObj) => showMovieInfo(movieObj || m.name)}
                         />
                     );

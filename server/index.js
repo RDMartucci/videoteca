@@ -52,14 +52,18 @@ app.get("/api/videos", async (req, res) => {
     const videos = [];
 
     for (const item of items) {
+      console.log("Item:", item.name, "Type:", item.isDirectory() ? "Folder" : "File");
       if (item.isDirectory()) {
         folders.push({ name: item.name, type: "folder" });
+        console.log("Folder found:", item.name);
       } else if (
+        console.log("File found:", item.name),
         item.isFile() &&
         [".mp4", ".mkv", ".avi"].includes(extname(item.name).toLowerCase())
       ) {
         // videos.push({ name: item.name, type: "movie" });
         videos.push({ name: item.name, type: "video" });
+        console.log("Video found:", item.name);
       }
     }
 
@@ -82,7 +86,17 @@ app.get("/api/play", (req, res) => {
   const fullPath = join(basePath, decodeURIComponent(filePath));
 
   // ⚡ Abrir VLC (asegurate de que esté en el PATH del sistema)
-  spawn("vlc", [fullPath], { detached: true, stdio: "ignore" }).unref();
+  // spawn("vlc", [fullPath], { detached: true, stdio: "ignore" }).unref();
+  try {
+  spawn("C:\\Program Files\\VideoLAN\\VLC\\vlc.exe", [fullPath], {
+    detached: true,
+    stdio: "ignore",
+  }).unref();
+  res.json({ success: true, file: fullPath });
+} catch (err) {
+  console.error("Error al intentar reproducir:", err);
+  res.status(500).json({ error: "No se pudo abrir VLC" });
+}
 
   res.json({ success: true, file: fullPath });
 });
@@ -90,4 +104,12 @@ app.get("/api/play", (req, res) => {
 // 🚀 Iniciar servidor
 app.listen(PORT, () => {
   console.log(`✅ Servidor corriendo en http://localhost:${PORT}`);
+});
+
+process.on("uncaughtException", (err) => {
+  console.error("Excepción no controlada:", err);
+});
+
+process.on("unhandledRejection", (reason) => {
+  console.error("Promesa rechazada sin manejar:", reason);
 });
