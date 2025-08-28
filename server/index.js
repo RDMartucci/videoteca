@@ -110,6 +110,6 @@ process.on("uncaughtException", (err) => {
   console.error("Excepción no controlada:", err);
 });
 
-process.on("unhandledRejection", (reason) => {
-  console.error("Promesa rechazada sin manejar:", reason);
+process.on("unhandledRejection", (motivo) => {
+  console.error("Promesa rechazada sin manejar:", motivo);
 });
