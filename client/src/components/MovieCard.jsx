@@ -254,11 +254,12 @@ export default function MovieCard({ titulo, ano, fileName, onPlay, onInfo }) {
             if (Array.isArray(nombreVideo) && nombreVideo.length > 0) {
                 setResults(nombreVideo);
 
-                // Seleccionar automáticamente SOLO si hay un resultado
+                // Seleccionar automáticamente SOLO si hay un resultado.
                 if (nombreVideo.length === 1) {
                     setSelected(nombreVideo[0]);
                 } else {
-                    setSelected(null); // esperar a que el usuario elija
+                    // setSelected(null); // esperar a que el usuario elija.
+                    setSelected(nombreVideo[0])// Seleccionar el primero por defecto.
                 }
             } else {
                 setResults([]);
