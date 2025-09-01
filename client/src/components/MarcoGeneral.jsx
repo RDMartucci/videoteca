@@ -439,6 +439,7 @@ async function openMovieInVLC(fileName) {
                     goBack={goBack}
                 />
                 <ListaPeliculas
+                    base={base}
                     videos={videos}
                     openMovieInVLC={openMovieInVLC}
                     showMovieInfo={showMovieInfo}
