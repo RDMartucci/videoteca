@@ -13,6 +13,8 @@ dist-ssr
 *.local
 ignorar
 
+*.terabox.uploading.cfg
+
 
 # Editor directories and files
 .vscode/*

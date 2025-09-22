@@ -322,12 +322,11 @@ export default function MovieCard({ titulo, ano, fileName, onPlay, onInfo }) {
                             )
                         }
                         style={{
-                            marginTop: 8,
-                            padding: 6,
+                            marginTop: 2,
+                            padding: 4,
                             borderRadius: 8,
-                            border: "1px solid #ccc",
                             width: "90%",
-                            margin: "10px auto"
+                            margin: "1px auto"
                         }}
                         className="form-select"
                     >

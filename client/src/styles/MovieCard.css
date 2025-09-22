@@ -115,7 +115,32 @@
   color: var(--color-texto-secundario);
 }
 
-/* Estilos del modal de info */
+/***** Estilos del modal de info ****/
+/* Contenedor del modal */
+.modal-container {
+  position: fixed;
+  inset: 0;
+  background: var(--fondo-primarioTR);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal-titulo{
+  color: var(--color-texto-primario);
+  text-align: center;
+  margin-bottom: 8px;
+  font-size: 1em;
+  font-weight: bold;
+  text-shadow: 1px 1px 6px var(--color-texto-negro01);
+}
+.titulo-year{
+  color: var(--color-texto-negro01);
+  margin-left: 6px;
+  text-shadow: 1px 1px 6px var(--color-texto-primarioTR);
+}
+
 .modal-movie-info {
   width: min(800px, 92vw);
   background: var(--fondo-secundarioTR);
@@ -127,18 +152,18 @@
 
 /* poster del modal de info */
 .poster-movie-info {
-  width: 550px;
+  width: 100%;
   margin: 0 auto;
   max-height: 300px;
 }
 
 .img-poster-movie-info {
-  width: 500px;
-  height: auto;
-  max-height: 350px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-top: 12px;
+    width: 100%;
+    height: auto;
+    max-height: 350px;
+    object-fit: fill;
+    border-radius: 8px;
+    margin-top: 12px;
 }
 
 /* Opcional: resalta el estado donde hace falta elegir */

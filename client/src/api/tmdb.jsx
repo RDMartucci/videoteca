@@ -190,3 +190,34 @@ export async function getMovieDetails(id) {
     return null;
   }
 }
+
+//Función para buscar los creditos de los titulos.
+export async function getMovieCredits(id) {
+  const API_KEY = import.meta.env.VITE_TMDB_KEY;
+  if (!API_KEY || !id) return null;
+
+  const params = new URLSearchParams({
+    api_key: API_KEY,
+    language: "es-ES",
+    append_to_response: "videos",
+  });
+
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYjNiOTFiY2UxYjgxMThjYWEyMDMyODUyY2YzZTNmMyIsIm5iZiI6MTc1NDQzMDk0Ny43NjEsInN1YiI6IjY4OTI3ZGUzMDJhZmFhYjRjZmRiZmEwNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.OcPkjJY0s2jfZEfzaxLBwGz3xAQsE37-yBsn7QGBt04'
+    }
+  };
+  const url = `https://api.themoviedb.org/3/movie/${id}/credits?${params.toString()}`;
+  
+  try {
+    const res = await fetch(url, options);
+    if (!res.ok) throw new Error(`TMDB credits error: ${res.status}`);
+    return await res.json();
+  }
+  catch (e) {
+    console.error("getMovieCredits() ->", e);
+    return null;
+  }
+}

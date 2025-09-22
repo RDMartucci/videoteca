@@ -33,13 +33,14 @@
   --color-texto-secundario: #e084f7;
   --color-texto-secundarioTR: #e084f796;
   --color-texto-terciario: #793f19;
-  --color-texto-terciario: #793f1996;
+  --color-texto-terciarioTR: #793f1996;
+  --color-texto-negro01: #111119;
+  --color-texto-negro01TR: #11111996;
 
   --color-primario: #25a888;
   --color-primarioTR: #25a88896;
   --color-secundario: #f7be99;
   --color-secundarioTR: #f7be9996;
-  --color-texto-secundario: #f0f0f0;
 
 /* colores de botones ****** */
   --color-btn-primario: #646cff;

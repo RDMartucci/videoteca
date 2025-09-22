@@ -113,28 +113,15 @@ export default function MovieInfoModal({ movie, onClose }) {
       //   zIndex: 1000,
       // }}
     >
-      <div className="modal-movie-info"
-        // style={{
-        //   width: "min(800px, 92vw)",
-        //   background: "#11111999",
-        //   borderRadius: 12,
-        //   padding: 16,
-        //   maxHeight: "90vh",
-        //   overflow: "auto",
-        // }}
+      <div className="d-flex flex-column justify-content-center modal-movie-info"
       >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            gap: 12,
-          }}
+      
+        <div className="d-flex justify-content-between align-items-center modal-titulo"
         >
           <h2 style={{ margin: 0 }}>
             {movie.title}{" "}
             {year && (
-              <span style={{ color: "#fff212    ", fontWeight: 400 }}>({year})</span>
+              <span className="titulo-year">({year})</span>
             )}
           </h2>
           <button
