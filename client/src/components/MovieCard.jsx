@@ -273,7 +273,7 @@ export default function MovieCard({ titulo, ano, fileName, onPlay, onInfo }) {
     }, [titulo, ano]);
 
     const poster = selected?.poster_path
-        ? `https://image.tmdb.org/t/p/w300${selected.poster_path}`
+        ? `https://image.tmdb.org/t/p/original/${selected.poster_path}`
         : null;
 
     console.log("MovieCard -> Results:", results);
@@ -297,47 +297,21 @@ export default function MovieCard({ titulo, ano, fileName, onPlay, onInfo }) {
                     <button
                         type="button"
                         onClick={() => onPlay(fileName)}
-                        className="btn-play"
+                        className="btn-play rounded-pill"
                     >
                         ▶ Reproducir
                     </button>
                     <button
                         type="button"
                         onClick={() => onInfo(selected)}
-                        className="btn btn-outline-info"
+                        className="btn rounded-pill btn-outline-info"
                     >
                         ℹ Info
                     </button>
                 </div>
 
-                {/* Selector cuando hay múltiples resultados */}
-                {/* {results.length > 1 && (
-                    <select
-                        aria-label="Elegir película"
-                        value={selected?.id || ""}
-                        onChange={(e) =>
-                            setSelected(
-                                results.find((x) => x.id === Number(e.target.value)) || null
-                            )
-                        }
-                        style={{
-                            marginTop: 8,
-                            padding: 6,
-                            borderRadius: 8,
-                            border: "1px solid #ccc",
-                            width: "-webkit-fill-available",
-                        }}
-                        className="form-select"
-                    >
-                        <option value="">Selecciona una película</option>
-                        {results.map((r) => (
-                            <option key={r.id} value={r.id}>
-                                {r.title} ({r.release_date?.slice(0, 4) || "N/A"})
-                            </option>
-                        ))}
-                    </select>
-                )} */}
             </div>
+                {/* Selector cuando hay múltiples resultados */}
             {results.length > 1 && (
                     <select
                         aria-label="Elegir película"

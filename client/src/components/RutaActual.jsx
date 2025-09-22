@@ -4,6 +4,9 @@ import React from "react";
 export default function RutaActual({ currentPath, onNavigate }) {
     const parts = currentPath ? currentPath.split("/").filter(Boolean) : [];
 
+    console.log("Current Path:", currentPath);
+    console.log("Path Parts:", parts);
+    
     return (
         <nav aria-label="breadcrumb" className="mb-3">
             <ol className="breadcrumb">
