@@ -93,6 +93,7 @@
 
 
 import React from "react";
+import "../styles/ModalInfo.css";
 
 export default function MovieInfoModal({ movie, onClose }) {
   const year = movie?.release_date?.slice(0, 4) || "";
@@ -101,47 +102,58 @@ export default function MovieInfoModal({ movie, onClose }) {
   );
   const trailerUrl = yt ? `https://www.youtube.com/watch?v=${yt.key}` : null;
 
-  return (
-    <div className="modal-container"
+  //Imagen de fondo (backdrop) si existe.
+  const backdropUrl = movie?.backdrop_path
+    ? `url(https://image.tmdb.org/t/p/w780${movie.backdrop_path})`
+    : "none";
 
-    >
-      <div className="d-flex flex-column justify-content-center modal-movie-info"
+  return (
+    <div className="modal-container">
+      <button
+        type="button"
+        onClick={onClose}
+        className="btn-Cerrar btn btn-outline-danger btn-xs rounded-pill"
       >
-      
-        <div className="d-flex justify-content-between align-items-center modal-titulo"
-        >
-          <h2 style={{ margin: 0 }}>
+        Cerrar
+      </button>
+      <div className="d-grid titulo-info-container"
+        style={{
+          backgroundImage: backdropUrl,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        {movie.poster_path && (
+          <div className="poster-titulo-info">
+            <img
+              className="img-poster-movie-info"
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt={movie.title}
+            />
+          </div>
+        )}
+        <div className="d-flex justify-content-between align-items-center titulo-btnCerrar">
+          <h2 className="titulo-movie">
             {movie.title}{" "}
             {year && (
               <span className="titulo-year">({year})</span>
             )}
           </h2>
-          <button
-            type="button"
-            onClick={onClose}
-            style={{
-              border: 0,
-              background: "#ef4444",
-              color: "#fff",
-              padding: "6px 10px",
-              borderRadius: 8,
-              cursor: "pointer",
-            }}
-          >
-            Cerrar
-          </button>
+          <div className="titulo-duracion-rating">
+            {movie.vote_average && (
+              <div className="rating-movie-info">
+                <span>⭐ {movie.vote_average} / 10</span>
+              </div>
+            )}
+            {movie.runtime && (
+              <div className="duration-movie-info">
+                <span>⏱ {Math.floor(movie.runtime / 60)}h {movie.runtime % 60}m</span>
+              </div>
+            )}
+          </div>
         </div>
 
-        {movie.poster_path && (
-          <div className="poster-movie-info">
-
-          <img className="img-poster-movie-info"
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt={movie.title}
-            // style={{ width: 600, borderRadius: 8, marginTop: 12, height: 450 }}
-          />
-          </div>
-        )}
 
         <p style={{ marginTop: 12, lineHeight: 1.45 }}>
           {movie.overview || "Sin descripción."}
@@ -164,12 +176,6 @@ export default function MovieInfoModal({ movie, onClose }) {
           </p>
         )}
 
-        {movie.popularity && (
-          <p style={{ marginTop: 2 }}>
-            <strong>TMDB (Valoración):</strong> {movie.popularity}
-          </p>
-        )}
-
         {movie.credits?.crew?.length > 0 && (
           <p style={{ marginTop: 2 }}>
             <strong>Director:</strong>{" "}
@@ -178,7 +184,7 @@ export default function MovieInfoModal({ movie, onClose }) {
               .map((c) => c.name)
               .join(", ")}
           </p>
-        )} 
+        )}
 
         {trailerUrl && (
           <div style={{ marginTop: 5 }}>

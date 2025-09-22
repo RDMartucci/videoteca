@@ -115,9 +115,9 @@
   color: var(--color-texto-secundario);
 }
 
-/***** Estilos del modal de info ****/
+/* **** Estilos del modal de info ***
 /* Contenedor del modal */
-.modal-container {
+/* .modal-container {
   position: fixed;
   inset: 0;
   background: var(--fondo-primarioTR);
@@ -126,65 +126,64 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
-}
-.modal-titulo{
+} */
+/* .modal-titulo{
   color: var(--color-texto-primario);
   text-align: center;
   margin-bottom: 8px;
   font-size: 1em;
   font-weight: bold;
   text-shadow: 1px 1px 6px var(--color-texto-negro01);
-}
-.titulo-year{
+} */
+/* .titulo-year{
   color: var(--color-texto-negro01);
   margin-left: 6px;
   text-shadow: 1px 1px 6px var(--color-texto-primarioTR);
-}
+} */
 
-.modal-movie-info {
+/* .modal-movie-info {
   width: min(800px, 92vw);
   background: var(--fondo-secundarioTR);
   border-radius: 12px;
   padding: 16px;
   max-height: 90vh;
   overflow: "auto";
-}
+} */
 
 /* poster del modal de info */
-.poster-movie-info {
+/* .poster-movie-info {
   width: 100%;
   margin: 0 auto;
   max-height: 300px;
-}
+} */
 
-.img-poster-movie-info {
+/* .img-poster-movie-info {
     width: 100%;
     height: auto;
     max-height: 350px;
     object-fit: fill;
     border-radius: 8px;
     margin-top: 12px;
-}
+} */
 
 /* Opcional: resalta el estado donde hace falta elegir */
-.custom-card.needs-selection {
+/* .custom-card.needs-selection {
   outline: 2px dashed #f0ad4e;
   outline-offset: 6px;
-}
+} */
 
 /* Cartel/aviso */
-.notice {
+/* .notice {
   margin-top: 8px;
   padding: 8px 12px;
   border-radius: 10px;
   background: #fff3cd;
-  /* amarillo suave */
   border: 1px solid #ffeeba;
   font-size: 0.9rem;
-}
+} */
 
 /* Deshabilita interacción visualmente en el overlay si no hay selección */
-.overlay.overlay--disabled {
+/* .overlay.overlay--disabled {
   opacity: 0.6;
   pointer-events: none;
-}
+} */
