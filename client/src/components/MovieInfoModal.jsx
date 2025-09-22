@@ -103,15 +103,7 @@ export default function MovieInfoModal({ movie, onClose }) {
 
   return (
     <div className="modal-container"
-      // style={{
-      //   position: "fixed",
-      //   inset: 0,
-      //   background: "rgba(0,0,0,0.7)",
-      //   display: "flex",
-      //   alignItems: "center",
-      //   justifyContent: "center",
-      //   zIndex: 1000,
-      // }}
+
     >
       <div className="d-flex flex-column justify-content-center modal-movie-info"
       >
@@ -156,14 +148,40 @@ export default function MovieInfoModal({ movie, onClose }) {
         </p>
 
         {movie.genres?.length > 0 && (
-          <p style={{ marginTop: 8 }}>
+          <p style={{ marginTop: 2 }}>
             <strong>Géneros:</strong>{" "}
             {movie.genres.map((g) => g.name).join(", ")}
           </p>
         )}
 
+        {movie.credits?.cast?.length > 0 && (
+          <p style={{ marginTop: 2 }}>
+            <strong>Reparto:</strong>{" "}
+            {movie.credits.cast
+              .slice(0, 6)
+              .map((c) => c.name)
+              .join(", ")}
+          </p>
+        )}
+
+        {movie.popularity && (
+          <p style={{ marginTop: 2 }}>
+            <strong>TMDB (Valoración):</strong> {movie.popularity}
+          </p>
+        )}
+
+        {movie.credits?.crew?.length > 0 && (
+          <p style={{ marginTop: 2 }}>
+            <strong>Director:</strong>{" "}
+            {movie.credits.crew
+              .filter((c) => c.job === "Director")
+              .map((c) => c.name)
+              .join(", ")}
+          </p>
+        )} 
+
         {trailerUrl && (
-          <div style={{ marginTop: 12 }}>
+          <div style={{ marginTop: 5 }}>
             <a
               href={trailerUrl}
               target="_blank"

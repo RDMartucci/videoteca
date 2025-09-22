@@ -149,7 +149,7 @@ import SelectorBases from "./SelectorBases";
 import ListaCarpetas from "./ListaCarpetas";
 import ListaPeliculas from "./ListaPeliculas";
 import MovieInfoModal from "./MovieInfoModal";
-import { useMarcoGeneral } from "../hooks/useMarcoGeneral";
+import { useMarcoGeneral } from "../context/useMarcoGeneral";
 
 export default function MarcoGeneral() {
   const {
