@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getMovieDetails, searchMovie } from "../api/tmdb";
+import { getMovieCredits, getMovieDetails, searchMovie } from "../api/tmdb";
 import { procesarNombrePeliculaV2 } from "../components/utils";
 
 export function useMarcoGeneral() {
@@ -82,8 +82,14 @@ export function useMarcoGeneral() {
                 if (!list.length) return;
                 movie = list[0];
             }
-            const full = await getMovieDetails(movie.id);
-            setSelectedMovie(full || movie);
+            const detallesTitulo = await getMovieDetails(movie.id);
+            console.log("Detalles título:", detallesTitulo);
+            const creditosTitulo = await getMovieCredits(movie.id);
+            console.log("Créditos título:", creditosTitulo);
+            
+            detallesTitulo.credits = creditosTitulo;
+            
+            setSelectedMovie(detallesTitulo || movie);
         } catch (e) {
             console.error("showMovieInfo ->", e);
         }
