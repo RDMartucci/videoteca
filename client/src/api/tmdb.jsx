@@ -173,9 +173,16 @@ export async function getMovieDetails(id) {
     language: "es-ES",
     append_to_response: "videos",
   });
+  const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYjNiOTFiY2UxYjgxMThjYWEyMDMyODUyY2YzZTNmMyIsIm5iZiI6MTc1NDQzMDk0Ny43NjEsInN1YiI6IjY4OTI3ZGUzMDJhZmFhYjRjZmRiZmEwNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.OcPkjJY0s2jfZEfzaxLBwGz3xAQsE37-yBsn7QGBt04'
+  }
+};
   const url = `https://api.themoviedb.org/3/movie/${id}?${params.toString()}`;
   try {
-    const res = await fetch(url);
+    const res = await fetch(url, options);
     if (!res.ok) throw new Error(`TMDB details error: ${res.status}`);
     return await res.json();
   } catch (e) {

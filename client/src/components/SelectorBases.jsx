@@ -3,9 +3,9 @@ import React from "react";
 
 export default function SelectorBases({ bases, base, index, setBase, setIndex }) {
     return (
-        <div className="selector-bases d-grid gap-3 mb-3 pb-3" style={{ gridTemplateColumns: "1fr 5fr" }}>
+        <div className="selector-bases d-grid gap-3 mb-3 pb-3 bg-dark" style={{ gridTemplateColumns: "1fr 5fr" }}>
             <label>
-                Categoría:
+                Categoría
                 <select
                     value={base}
                     onChange={(e) => {
@@ -24,7 +24,7 @@ export default function SelectorBases({ bases, base, index, setBase, setIndex })
 
             {base && (
                 <label className="me-2 ">
-                    Ruta:
+                    Ruta
                     <select
                         value={index}
                         onChange={(e) => setIndex(Number(e.target.value))}

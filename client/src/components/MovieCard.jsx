@@ -273,7 +273,7 @@ export default function MovieCard({ titulo, ano, fileName, onPlay, onInfo }) {
     }, [titulo, ano]);
 
     const poster = selected?.poster_path
-        ? `https://image.tmdb.org/t/p/w300${selected.poster_path}`
+        ? `https://image.tmdb.org/t/p/original/${selected.poster_path}`
         : null;
 
     console.log("MovieCard -> Results:", results);

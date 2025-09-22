@@ -7,7 +7,7 @@ import cors from "cors";
 const app = express();
 app.use(json());
 
-// 🔓 Configuración de CORS: permitir solo el cliente
+// 🔓 Configuración de CORS: permitir solo el cliente.
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -29,12 +29,14 @@ const BASE_FOLDERS = {
   ],
 };
 
-// 📌 Endpoint: obtener categorías y rutas base
+// 📌 Endpoint: obtener rutas bases -> base 
+// (index[0]=películas, index[1]=series) y path (ruta relativa).
 app.get("/api/bases", (req, res) => {
   res.json(BASE_FOLDERS);
 });
 
-// 📌 Endpoint: listar carpetas y películas en una ruta
+// 📌 Endpoint: listar carpetas y películas según la ruta.
+// La nombré videos pero son archivos leídos de las carpetas base.
 app.get("/api/videos", async (req, res) => {
   const { base, index, path: currentPath } = req.query;
 
@@ -43,19 +45,25 @@ app.get("/api/videos", async (req, res) => {
   }
 
   const basePath = BASE_FOLDERS[base][index];
+  console.log("SERVER->apiVideos->Base Path:", basePath, "Current Path:", currentPath);
+
   const fullPath = join(basePath, decodeURIComponent(currentPath || ""));
+  console.log("SERVER->apiVideos->Full Path:", fullPath);
 
   try {
     const items = await fs.readdir(fullPath, { withFileTypes: true });
+    console.log(`Items found in ${fullPath}:`, items.map(i => i.name));
 
     const folders = [];
     const videos = [];
 
     for (const item of items) {
       console.log("Item:", item.name, "Type:", item.isDirectory() ? "Folder" : "File");
+
       if (item.isDirectory()) {
         folders.push({ name: item.name, type: "folder" });
         console.log("Folder found:", item.name);
+
       } else if (
         console.log("File found:", item.name),
         item.isFile() &&
