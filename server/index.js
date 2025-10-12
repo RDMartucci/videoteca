@@ -27,6 +27,13 @@ const BASE_FOLDERS = {
     "F:\\DESCARGAS COMPLETAS\\_020__SERIES__\\",
     "E:\\DESCARGAS 2\\--SERIES II",
   ],
+  otros: [
+    "E:\\",
+    "F:\\",
+    "C:\\Users\\bubito\\Downloads",
+    "C:\\Users\\bubito\\Desktop",
+    "C:\\Users\\bubito\\Videos"
+  ],
 };
 
 // 📌 Endpoint: obtener rutas bases -> base 
@@ -52,7 +59,7 @@ app.get("/api/videos", async (req, res) => {
 
   try {
     const items = await fs.readdir(fullPath, { withFileTypes: true });
-    console.log(`Items found in ${fullPath}:`, items.map(i => i.name));
+    console.log(`Items encontrados en ${fullPath}:`, items.map(i => i.name));
 
     const folders = [];
     const videos = [];
@@ -62,16 +69,15 @@ app.get("/api/videos", async (req, res) => {
 
       if (item.isDirectory()) {
         folders.push({ name: item.name, type: "folder" });
-        console.log("Folder found:", item.name);
-
+        //console.log("Folder found:", item.name);
       } else if (
-        console.log("File found:", item.name),
+        //console.log("File found:", item.name),
         item.isFile() &&
         [".mp4", ".mkv", ".avi"].includes(extname(item.name).toLowerCase())
       ) {
         // videos.push({ name: item.name, type: "movie" });
         videos.push({ name: item.name, type: "video" });
-        console.log("Video found:", item.name);
+        //console.log("Video found:", item.name);
       }
     }
 
