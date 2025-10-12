@@ -1,0 +1,115 @@
+/***** Estilos del modal de info ****/
+/* Contenedor del modal */
+.modal-container {
+    position: fixed;
+    inset: 0;
+    background: var(--fondo-primarioTR);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.titulo-info-container {
+    position: relative;
+    border-radius: 12px;
+    padding: 16px;
+    max-height: 90vh;
+    overflow: auto;
+    align-items: stretch;
+    justify-items: start;
+    grid-template-columns: 1fr 3fr;
+    z-index: 1;
+}
+
+.titulo-info-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /*background: rgba(0, 0, 0, 0.55);*/
+    /* oscurece el backdrop */
+    border-radius: 12px;
+    z-index: 0;
+}
+
+.titulo-info {
+    color: var(--color-texto-primario);
+    text-align: center;
+    margin-bottom: 8px;
+    /* font-size: 1em; */
+    /* font-weight:bolder; */
+    text-shadow: 1px 1px 6px var(--color-texto-negro01);
+}
+
+.titulo-nombre {
+    margin: 0;
+    font-weight: bolder;
+    text-transform: capitalize;
+    text-shadow: -4px 3px 10px var(--color-texto-negro01),
+        5px -6px 20px var(--color-texto-negro01);
+
+}
+
+.titulo-year {
+    color: var(--color-texto-negro01);
+    /*margin-left: 6px;*/
+    text-shadow: 1px 1px 6px var(--color-texto-primarioTR);
+}
+
+/* poster del modal de info */
+.poster-titulo-info {
+    width: 300px;
+    margin: 0 auto;
+    height: 500px;
+}
+
+.img-poster-movie-info {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    border-radius: 8px;
+    margin-top: 12px;
+}
+
+/* trailer del modal de info */
+.titulo-trailer {
+    position: absolute;
+    width: 300px;
+    padding: 0.7em 1.5em;
+    top: 12px;
+    text-align: center;
+    background-color: var(--fondo-primarioTR);
+    border-radius: 50px;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+.titulo-trailer:hover{
+    background-color: var(--fondo-primario);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+.info-trailer-link{
+    color: var(--color-btn-primario);
+    width: 100%;
+    font-weight: 600;
+    text-transform: capitalize;
+    text-shadow: 1px 1px 6px var(--color-texto-negro01);
+    z-index: 1;
+    
+    transition: all 0.3s ease;
+}
+.info-trailer-link:hover{
+    color: var(--color-texto-primario);
+    text-shadow: 1px 1px 6px var(--color-texto-primario);
+    transition: all 0.3s ease;
+}
+
+.btn-Cerrar {
+    position: absolute;
+    top: 54px;
+    right: 20px;
+    z-index: 2;
+    padding: 2px 8px;
+    transition: all 0.3s ease;
+}

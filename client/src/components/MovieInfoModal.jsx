@@ -93,6 +93,7 @@
 
 
 import React from "react";
+import "../styles/ModalInfo.css";
 
 export default function MovieInfoModal({ movie, onClose }) {
   const year = movie?.release_date?.slice(0, 4) || "";
@@ -101,101 +102,116 @@ export default function MovieInfoModal({ movie, onClose }) {
   );
   const trailerUrl = yt ? `https://www.youtube.com/watch?v=${yt.key}` : null;
 
+  //Imagen de fondo (backdrop) si existe.
+  const backdropUrl = movie?.backdrop_path
+    ? `url(https://image.tmdb.org/t/p/w780${movie.backdrop_path})`
+    : "none";
+
   return (
-    <div className="modal-container"
-
-    >
-      <div className="d-flex flex-column justify-content-center modal-movie-info"
+    <div className="modal-container">
+      <button
+        type="button"
+        onClick={onClose}
+        className="btn-Cerrar btn btn-outline-danger btn-xs rounded-pill"
       >
-      
-        <div className="d-flex justify-content-between align-items-center modal-titulo"
-        >
-          <h2 style={{ margin: 0 }}>
-            {movie.title}{" "}
-            {year && (
-              <span className="titulo-year">({year})</span>
-            )}
-          </h2>
-          <button
-            type="button"
-            onClick={onClose}
-            style={{
-              border: 0,
-              background: "#ef4444",
-              color: "#fff",
-              padding: "6px 10px",
-              borderRadius: 8,
-              cursor: "pointer",
-            }}
-          >
-            Cerrar
-          </button>
-        </div>
-
+        Cerrar
+      </button>
+      <div className="d-grid titulo-info-container"
+        style={{
+          backgroundImage: backdropUrl,
+          backgroundSize: "cover",
+          backgroundPosition: "left upper",
+          backgroundRepeat: "no-repeat",
+          backdropFilter: "blur(8px) brightness(0.4)",
+        }}>
         {movie.poster_path && (
-          <div className="poster-movie-info">
-
-          <img className="img-poster-movie-info"
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt={movie.title}
-            // style={{ width: 600, borderRadius: 8, marginTop: 12, height: 450 }}
-          />
+          <div className="poster-titulo-info">
+            <img
+              className="img-poster-movie-info"
+              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              alt={movie.title}
+            />
+            <div className="titulo-trailer">
+            {trailerUrl && (           
+                <a
+                  className="info-trailer-link"
+                  href={trailerUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  🎬 ver trailer
+                </a>             
+            )}
+          </div>
           </div>
         )}
+        <div className="d-flex titulo-info-container">
+          {/* <div className="titulo-trailer">
+            {trailerUrl && (           
+                <a
+                  className="info-trailer-link"
+                  href={trailerUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  🎬 ver trailer
+                </a>             
+            )}
+          </div> */}
+  
+            <h2 className="titulo-nombre">
+              {movie.title}{" "}
+              {year && (
+                <span className="titulo-year">({year})</span>
+              )}
 
-        <p style={{ marginTop: 12, lineHeight: 1.45 }}>
-          {movie.overview || "Sin descripción."}
-        </p>
-
-        {movie.genres?.length > 0 && (
-          <p style={{ marginTop: 2 }}>
-            <strong>Géneros:</strong>{" "}
-            {movie.genres.map((g) => g.name).join(", ")}
-          </p>
-        )}
-
-        {movie.credits?.cast?.length > 0 && (
-          <p style={{ marginTop: 2 }}>
-            <strong>Reparto:</strong>{" "}
-            {movie.credits.cast
-              .slice(0, 6)
-              .map((c) => c.name)
-              .join(", ")}
-          </p>
-        )}
-
-        {movie.popularity && (
-          <p style={{ marginTop: 2 }}>
-            <strong>TMDB (Valoración):</strong> {movie.popularity}
-          </p>
-        )}
-
-        {movie.credits?.crew?.length > 0 && (
-          <p style={{ marginTop: 2 }}>
-            <strong>Director:</strong>{" "}
-            {movie.credits.crew
-              .filter((c) => c.job === "Director")
-              .map((c) => c.name)
-              .join(", ")}
-          </p>
-        )} 
-
-        {trailerUrl && (
-          <div style={{ marginTop: 5 }}>
-            <a
-              href={trailerUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                color: "#dc2626",
-                textDecoration: "none",
-                fontWeight: 600,
-              }}
-            >
-              🎬 Ver tráiler en YouTube
-            </a>
+            </h2>
+          <div className="titulo-duracion-rating">
+            {movie.vote_average && (
+              <div className="rating-movie-info">
+                <span>⭐ {movie.vote_average} / 10</span>
+              </div>
+            )}
+            {movie.runtime && (
+              <div className="duration-movie-info">
+                <span>⏱ {Math.floor(movie.runtime / 60)}h {movie.runtime % 60}m</span>
+              </div>
+            )}
           </div>
-        )}
+
+
+
+          <p style={{ marginTop: 12, lineHeight: 1.45 }}>
+            {movie.overview || "Sin descripción."}
+          </p>
+
+          {movie.genres?.length > 0 && (
+            <p style={{ marginTop: 2 }}>
+              <strong>Géneros:</strong>{" "}
+              {movie.genres.map((g) => g.name).join(", ")}
+            </p>
+          )}
+
+          {movie.credits?.cast?.length > 0 && (
+            <p style={{ marginTop: 2 }}>
+              <strong>Reparto:</strong>{" "}
+              {movie.credits.cast
+                .slice(0, 6)
+                .map((c) => c.name)
+                .join(", ")}
+            </p>
+          )}
+
+          {movie.credits?.crew?.length > 0 && (
+            <p style={{ marginTop: 2 }}>
+              <strong>Director:</strong>{" "}
+              {movie.credits.crew
+                .filter((c) => c.job === "Director")
+                .map((c) => c.name)
+                .join(", ")}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
