@@ -19,19 +19,20 @@ const PORT = 5000;
 // 📂 Carpetas base donde se encuentran los directorios locales.
 const BASE_FOLDERS = {
   peliculas: [
-    "F:\\DESCARGAS COMPLETAS\\_010__PELICULAS__\\",
     "E:\\DESCARGAS 2\\--PELICULAS II",
-    "E:\\DESCARGAS 2\\DETorrent",
+    "F:\\dTorrents\\PELICULAS y SERIES\\PELICULAS"
   ],
   series: [
-    "F:\\DESCARGAS COMPLETAS\\_020__SERIES__\\",
+    "F:\\dTorrents\\PELICULAS y SERIES\\SERIES",
     "E:\\DESCARGAS 2\\--SERIES II",
+    
   ],
   otros: [
     "E:\\",
     "F:\\",
+    "H:\\",
+    "J:\\",
     "C:\\Users\\bubito\\Downloads",
-    "C:\\Users\\bubito\\Desktop",
     "C:\\Users\\bubito\\Videos"
   ],
 };
