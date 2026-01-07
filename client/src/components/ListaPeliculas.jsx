@@ -7,7 +7,7 @@ import RutaActual from "./RutaActual";
 export default function ListaPeliculas({ base, videos, openMovieInVLC, showMovieInfo, currentPath, setCurrentPath }) {
     if (!videos?.length) return <p>No hay películas en esta carpeta.</p>;
 
-    const [cargandoImagen, setCargandoImagen] = useState(true);
+    //const [cargandoImagen, setCargandoImagen] = useState(true);
 
 
     return (

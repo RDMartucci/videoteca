@@ -128,3 +128,12 @@ li:hover{
   margin-bottom: 5px;
   border-radius: 10px;
 }
+
+/* Ruta actual */
+.breadcrumb-item{
+  color: var(--color-texto-secundario);
+}
+
+.breadcrumb-item.active {
+    color: #0d6efd;
+}

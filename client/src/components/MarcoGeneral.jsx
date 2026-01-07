@@ -29,7 +29,7 @@ export default function MarcoGeneral() {
         />
       </div>
 
-      <div className="d-grid gap-3 mb-3 pb-3" style={{ gridTemplateColumns: "1fr 5fr" }}>
+      <div className="d-grid gap-3 mb-3 pb-3" style={{ gridTemplateColumns: "2fr 6fr" }}>
         <ListaCarpetas
           folders={folders}
           currentPath={currentPath}
