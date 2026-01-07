@@ -115,6 +115,19 @@
   color: var(--color-texto-secundario);
 }
 
+.spinner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.1); /* Opcional: un fondo tenue */
+    z-index: 10;
+}
+
 /* **** Estilos del modal de info ***
 /* Contenedor del modal */
 /* .modal-container {

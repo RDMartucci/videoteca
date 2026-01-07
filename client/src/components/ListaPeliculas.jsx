@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MovieCard from "./MovieCard";
 // import { cleanTitle, LimpiarNombreSerie } from "./utils";
 import { procesarNombreMedia } from "./utils";
@@ -7,9 +7,13 @@ import RutaActual from "./RutaActual";
 export default function ListaPeliculas({ base, videos, openMovieInVLC, showMovieInfo, currentPath, setCurrentPath }) {
     if (!videos?.length) return <p>No hay películas en esta carpeta.</p>;
 
+    const [cargandoImagen, setCargandoImagen] = useState(true);
+
+
     return (
         <div style={{ flex: 2 }}>
             <RutaActual currentPath={currentPath} onNavigate={setCurrentPath} />
+
             <div
                 style={{
                     display: "grid",
@@ -17,6 +21,7 @@ export default function ListaPeliculas({ base, videos, openMovieInVLC, showMovie
                     gap: "1rem",
                 }}
             >
+
 
                 {videos.map((m) => {
                     const { nombre, ano, temporada, episodio } = procesarNombreMedia(m.name);
