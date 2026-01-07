@@ -130,7 +130,7 @@ export function procesarNombreMedia(nombre) {
 
     // Quitar tags comunes
     const regexTags =
-        /\b(1080p|720p|2160p|4k|bluray|brrip|hdrip|hdtv|webrip|dvdrip|x264|x265|h264|hevc|extended|remastered|uncut|proper)\b/gi;
+        /\b(1080p|720p|2160p|4k|bluray|brrip|hdrip|hdtv|webrip|dvdrip|x264|x265|h264|hevc|extended|remastered|uncut|proper|xvid|h265)\b/gi;
     sinExtension = sinExtension.replace(regexTags, "");
 
     // Reemplazar separadores y limpiar espacios
