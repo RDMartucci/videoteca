@@ -13,7 +13,7 @@ function App() {
     <>
       <Header />
       <main>
-        <section className="sec-home min-vh-100 fondo-color text-light">
+        <section className="sec-home min-vh-90 fondo-color text-light">
           {/* <Display /> */}
           {/* <Home /> */}
           <MarcoGeneral />
