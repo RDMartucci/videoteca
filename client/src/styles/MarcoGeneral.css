@@ -1,0 +1,30 @@
+/* Clase para los contenedores con scroll */
+.custom-scroll {
+    overflow-y: auto;
+    scrollbar-width: thin; /* Para Firefox: Barra delgada */
+    scrollbar-color: #007bff #f1f1f1; /* Para Firefox: color del manejador y del fondo */
+}
+
+/* --- Estilos para Chrome, Edge y Safari (Webkit) --- */
+
+/* 1. El ancho de la barra */
+.custom-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* 2. El fondo de la barra */
+.custom-scroll::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+/* 3. El "tirador" o parte que se mueve */
+.custom-scroll::-webkit-scrollbar-thumb {
+    background: #007bff; /* Color azul de Bootstrap */
+    border-radius: 10px;
+}
+
+/* 4. Efecto al pasar el mouse por el tirador */
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+    background: #0056b3;
+}
