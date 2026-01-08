@@ -4,7 +4,7 @@ import { searchMovie } from "../api/tmdb";
 import Spinner from 'react-bootstrap/Spinner';
 import "../styles/MovieCard.css";
 
-export default function MovieCard({ titulo, ano, fileName, onPlay, onInfo }) {
+export default function MovieCard({ titulo, ano, fileName, busqueda, onPlay, onInfo }) {
     const [results, setResults] = useState([]);
     const [selected, setSelected] = useState(null);
     const [cargandoDatos, setCargandoDatos] = useState(true);
@@ -30,6 +30,24 @@ export default function MovieCard({ titulo, ano, fileName, onPlay, onInfo }) {
         run();
         return () => { ignore = true; };
     }, [titulo, ano]);
+
+
+    // FUNCIÓN ECMA6 PARA NORMALIZAR TEXTO (Quita tildes y mayúsculas)
+    const normalizar = (texto) =>
+        texto ? texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") : "";
+
+    const terminoLimpio = normalizar(busqueda);
+    const tituloArchivo = normalizar(titulo);
+    const tituloTMDB = normalizar(selected?.title || "");
+
+    // DETERMINAR SI SE MUESTRA
+    // Si no hay búsqueda, mostramos siempre. Si hay, comparamos.
+    const debeMostrarse = !busqueda ||
+        tituloArchivo.includes(terminoLimpio) ||
+        tituloTMDB.includes(terminoLimpio);
+
+    // Si no debe mostrarse, retornamos null para que no ocupe espacio
+    if (!debeMostrarse) return null;
 
     const poster = selected?.poster_path
         ? `https://image.tmdb.org/t/p/original/${selected.poster_path}`
@@ -61,7 +79,7 @@ export default function MovieCard({ titulo, ano, fileName, onPlay, onInfo }) {
 
                 {/* Overlay con botones (Solo se muestra si no está cargando datos) */}
                 {!cargandoDatos && (
-                    <div className="overlay" 
+                    <div className="overlay"
                         onClick={() => onInfo(selected)}>
                         <button onClick={() => onPlay(fileName)} className="btn-play rounded-pill">
                             ▶ Reproducir

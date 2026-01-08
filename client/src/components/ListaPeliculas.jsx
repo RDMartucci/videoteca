@@ -4,7 +4,8 @@ import MovieCard from "./MovieCard";
 import { procesarNombreMedia } from "./utils";
 import RutaActual from "./RutaActual";
 
-export default function ListaPeliculas({ base, videos, openMovieInVLC, showMovieInfo, currentPath, setCurrentPath }) {
+export default function ListaPeliculas({ base, videos, busqueda, openMovieInVLC, showMovieInfo, currentPath, setCurrentPath }) {
+
     if (!videos?.length) return <p>No hay películas en esta carpeta.</p>;
 
     //const [cargandoImagen, setCargandoImagen] = useState(true);
@@ -39,6 +40,7 @@ export default function ListaPeliculas({ base, videos, openMovieInVLC, showMovie
                             titulo={nombre}
                             ano={infoExtra} // Ahora puede ser año o TxxExx (año)
                             fileName={m.name}
+                            busqueda={busqueda}
                             onPlay={openMovieInVLC}
                             onInfo={(movieObj) => showMovieInfo(movieObj || m.name)}
                         />
